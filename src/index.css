@@ -1,0 +1,84 @@
+.ispovest {
+  border-style: none;
+  border-radius: 10px;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-right: 0px;
+}
+.ispovestText {
+  border-style: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 15px;
+  margin-right: 0px;
+  margin-left: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.arena {
+  border-style: none;
+  border-radius: 10px;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.reactionContainer {
+}
+body {
+  background-image: url("static/circuit-texture.jpg");
+  background-size: 100% 100%;
+}
+div {
+  color: lightgray;
+  font-size: large;
+}
+.ispovestText {
+  font-size: larger;
+}
+.jumbotron {
+  opacity: 0;
+  color: lightgray;
+}
+.navbar {
+  color: lightgray;
+}
+.button {
+  background: none;
+  border: none;
+  padding: 5;
+  font: inherit;
+  font-size: smaller;
+  outline: none;
+  cursor: pointer;
+  outline: inherit;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-style: none;
+  border-radius: 5px;
+  color: rgb(129, 129, 129);
+}
+.button:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.reactionCount {
+  margin: 5px;
+  font-size: smaller;
+  color: rgb(129, 129, 129);
+}
+
+.commentButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+.commentButton {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+html,
+body,
+#app,
+#app > div {
+  height: 100%;
+}
