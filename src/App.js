@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Jumbotron } from "react-bootstrap";
-import backgroundImage from "./darker-honeycomb.png";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import { constants } from "./constants";
+
 function App() {
   const [ispovesti, setIspovesti] = useState(null);
-  const dislikes = constants.LIKE_VARIATIONS;
-  const likes = constants.DISLIKE_VARIATIONS;
+  const likes = constants.LIKE_VARIATIONS;
+  const dislikes = constants.DISLIKE_VARIATIONS;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,17 +21,36 @@ function App() {
   const handleLikeClick = (ispovestId) => {
     fetch(`${constants.API_ROOT}/ispovesti/${ispovestId}/postLike`, {
       method: "post",
-      body: "",
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Created Gist:", data.html_url);
-      });
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: {},
+    });
+    const newIspovesti = ispovesti;
+    const i = ispovesti.findIndex((ispovest) => ispovest.id === ispovestId);
+    const newIspovest = ispovesti[i];
+    newIspovest.timesLiked += 1;
+    newIspovest.likes += 1;
+    newIspovesti[i] = newIspovest;
+    setIspovesti(JSON.parse(JSON.stringify(newIspovesti)));
   };
 
-  const handleDislikeClick = (ispovestId) => {};
+  const handleDislikeClick = (ispovestId) => {
+    fetch(`${constants.API_ROOT}/ispovesti/${ispovestId}/postDislike`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: {},
+    });
+    const newIspovesti = ispovesti;
+    const i = ispovesti.findIndex((ispovest) => ispovest.id === ispovestId);
+    const newIspovest = ispovesti[i];
+    newIspovest.timesDisliked += 1;
+    newIspovest.dislikes += 1;
+    newIspovesti[i] = newIspovest;
+    setIspovesti(JSON.parse(JSON.stringify(newIspovesti)));
+  };
 
   return (
     <div className="body">
@@ -50,17 +68,41 @@ function App() {
                       <button
                         className="button"
                         variant="dark"
-                        onClick={() => handleLikeClick(ispovest.id)}
+                        onClick={() => {
+                          handleLikeClick(ispovest.id);
+                        }}
+                        disabled={
+                          ispovest.timesLiked > 0 || ispovest.timesDisliked > 0
+                        }
+                        style={
+                          ispovest.timesLiked > 0
+                            ? { backgroundColor: "rgba(50, 50, 50, 0.5)" }
+                            : {}
+                        }
+                      >
+                        {likes[Math.floor(Math.random() * likes.length)]}
+                      </button>
+                      <span className="reactionCount">{ispovest.likes}</span>
+                    </Col>
+                    <Col className="reaction" md="auto">
+                      <button
+                        className="button"
+                        variant="dark"
+                        onClick={() => {
+                          handleDislikeClick(ispovest.id);
+                        }}
+                        disabled={
+                          ispovest.timesLiked > 0 || ispovest.timesDisliked > 0
+                        }
+                        style={
+                          ispovest.timesDisliked > 0
+                            ? { backgroundColor: "rgba(50, 50, 50, 0.5)" }
+                            : {}
+                        }
                       >
                         {dislikes[Math.floor(Math.random() * dislikes.length)]}
                       </button>
                       <span className="reactionCount">{ispovest.dislikes}</span>
-                    </Col>
-                    <Col className="reaction" md="auto">
-                      <button className="button" variant="dark">
-                        {likes[Math.floor(Math.random() * likes.length)]}
-                      </button>
-                      <span className="reactionCount">{ispovest.likes}</span>
                     </Col>
                     <Col className="commentButtonContainer">
                       <button className="button commentButton" variant="dark">
