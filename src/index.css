@@ -2,6 +2,7 @@
   border-style: none;
   border-radius: 10px;
   margin: 10px;
+  margin-left: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   margin-right: 0px;
 }
@@ -13,6 +14,7 @@
   margin-right: 0px;
   margin-left: 0px;
   background-color: rgba(0, 0, 0, 0.5);
+  font-size: larger;
 }
 .arena {
   border-style: none;
@@ -21,18 +23,15 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.reactionContainer {
-}
 body {
   background-image: url("static/circuit-texture.jpg");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 div {
   color: lightgray;
   font-size: large;
-}
-.ispovestText {
-  font-size: larger;
 }
 .jumbotron {
   opacity: 0;
@@ -74,6 +73,14 @@ div {
 .commentButton {
   margin-left: auto;
   margin-right: 0;
+}
+
+.my-modal .modal-content {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 1);
 }
 
 html,
