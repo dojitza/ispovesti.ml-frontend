@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+localStorage.setItem("randomSeed", Date.now());
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

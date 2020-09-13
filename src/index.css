@@ -1,16 +1,18 @@
 .ispovest {
   border-style: none;
   border-radius: 10px;
+  border-color: rgba(211, 211, 211, 0.4);
+  border-width: 2px;
   margin: 10px;
   margin-left: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   margin-right: 0px;
+  padding-top: 15px;
 }
 .ispovestText {
   border-style: none;
   border-radius: 10px;
   padding: 10px;
-  margin-top: 15px;
   margin-right: 0px;
   margin-left: 0px;
   background-color: rgba(0, 0, 0, 0.5);
@@ -76,7 +78,13 @@ div {
 }
 
 .my-modal .modal-content {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-image: url("static/bricks.jpg");
+
+  background-color: rgba(31, 116, 152, 1);
+  border-style: none;
+  border-width: 1px;
+  border-color: rgba(211, 211, 211, 0.4);
+  border-radius: 10px;
 }
 
 .modal-backdrop {

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button, Modal, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ArenaIspovest } from "./ArenaIspovest";
+import { Ispovest } from "./Ispovest";
+
 import "./index.css";
 
 export function Arena() {
@@ -9,6 +11,16 @@ export function Arena() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`${constants.API_ROOT}/arenaIspovesti`);
+      const ispovesti = await response.json();
+      setIspovesti(ispovesti);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -32,10 +44,15 @@ export function Arena() {
         onHide={handleClose}
         backdrop={true}
         className="my-modal"
+        animation={true}
       >
         <Modal.Body>
-          <ArenaIspovest />
-          <ArenaIspovest />
+          <ArenaIspovest
+            ispovest={ispovest}
+            handleLikeClick={handleLikeClick}
+            handleDislikeClick={handleDislikeClick}
+            handleSuperlikeClick={handleSuperlikeClick}
+          />
         </Modal.Body>
       </Modal>
     </>
