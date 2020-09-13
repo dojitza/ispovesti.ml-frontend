@@ -1,36 +1,75 @@
-import React, { useState } from "react";
-import { Button, Modal, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Modal, Container, Row, Col, Button, Jumbotron } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ArenaIspovest } from "./ArenaIspovest";
-import { Ispovest } from "./Ispovest";
+
+import { constants } from "./constants";
 
 import "./index.css";
 
 export function Arena() {
+  const [arenaIspovesti, setArenaIspovesti] = useState([]);
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${constants.API_ROOT}/arenaIspovesti`);
+        const arenaIspovesti = await response.json();
+        setArenaIspovesti(arenaIspovesti);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${constants.API_ROOT}/arenaIspovesti`);
-      const ispovesti = await response.json();
-      setIspovesti(ispovesti);
-    };
+  const handleReactionClick = (ispovestId, reaction) => {
+    if (arenaIspovesti.length === 1) {
+      setShow(false);
+      setTimeout(() => setArenaIspovesti(arenaIspovesti.slice(1)), 1000);
+      alert("Svajpali ste sve ispovesti u današnjoj areni");
+    } else {
+      setArenaIspovesti(arenaIspovesti.slice(1));
+    }
 
-    fetchData();
-  }, []);
+    fetch(`${constants.API_ROOT}/arenaIspovesti/${ispovestId}/postReaction`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: { reaction: reaction },
+    });
+  };
+
+  const handleLikeClick = (ispovestId) => {
+    handleReactionClick(ispovestId, "like");
+  };
+
+  const handleDislikeClick = (ispovestId) => {
+    handleReactionClick(ispovestId, "dislike");
+  };
+
+  const handleSuperlikeClick = (ispovestId) => {
+    handleReactionClick(ispovestId, "superlike");
+  };
 
   return (
     <>
       <button
+        disabled={arenaIspovesti.length === 0}
         className="button"
         variant="dark"
         onClick={handleShow}
         style={{
           fontSize: 36,
-          backgroundColor: "rgba(0, 0, 0, 0.66)",
+          backgroundColor:
+            arenaIspovesti.length > 0
+              ? "rgba(0, 0, 0, 0.66)"
+              : "rgba(50, 50, 50, 0.66)",
           color: "lightGray",
         }}
       >
@@ -38,7 +77,7 @@ export function Arena() {
       </button>
 
       <Modal
-        size="xl"
+        size="m"
         centered="true"
         show={show}
         onHide={handleClose}
@@ -47,12 +86,14 @@ export function Arena() {
         animation={true}
       >
         <Modal.Body>
-          <ArenaIspovest
-            ispovest={ispovest}
-            handleLikeClick={handleLikeClick}
-            handleDislikeClick={handleDislikeClick}
-            handleSuperlikeClick={handleSuperlikeClick}
-          />
+          {arenaIspovesti.length > 0 && (
+            <ArenaIspovest
+              ispovest={arenaIspovesti[0]}
+              handleLikeClick={handleLikeClick}
+              handleDislikeClick={handleDislikeClick}
+              handleSuperlikeClick={handleSuperlikeClick}
+            />
+          )}
         </Modal.Body>
       </Modal>
     </>

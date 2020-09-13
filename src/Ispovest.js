@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import seedrandom from "seedrandom";
 
 export function Ispovest(props) {
   const {
@@ -11,8 +10,6 @@ export function Ispovest(props) {
     handleDislikeClick,
     handleLikeClick,
   } = props;
-
-  const rng = seedrandom(localStorage.getItem("randomSeed"));
 
   return (
     <Row style={{ margin: 5 }} className="ispovest">
@@ -40,7 +37,7 @@ export function Ispovest(props) {
                   : {}
               }
             >
-              {likes[Math.floor(rng() * likes.length)]}
+              {likes[Math.floor(Math.random() * likes.length)]}
             </button>
             <span className="reactionCount">{ispovest.likes}</span>
           </Col>
@@ -65,7 +62,7 @@ export function Ispovest(props) {
                   : {}
               }
             >
-              {dislikes[Math.floor(rng() * dislikes.length)]}
+              {dislikes[Math.floor(Math.random() * dislikes.length)]}
             </button>
             <span className="reactionCount">{ispovest.dislikes}</span>
           </Col>
