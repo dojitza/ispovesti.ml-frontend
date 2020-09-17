@@ -41,7 +41,7 @@ export function Arena() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: { reaction: reaction },
+      body: JSON.stringify(reaction),
     });
   };
 

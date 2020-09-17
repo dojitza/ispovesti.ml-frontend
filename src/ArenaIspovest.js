@@ -21,7 +21,7 @@ export function ArenaIspovest(props) {
       </Row>
       <Row>
         <Col
-          onClick={handleDislikeClick}
+          onClick={() => handleDislikeClick(ispovest.id)}
           style={{
             cursor: "pointer",
             color: "red",
@@ -32,7 +32,7 @@ export function ArenaIspovest(props) {
           <span title={"Dislajk"}>❎</span>
         </Col>
         <Col
-          onClick={handleSuperlikeClick}
+          onClick={() => handleSuperlikeClick(ispovest.id)}
           style={{
             cursor: "pointer",
             color: "cyan",
@@ -43,7 +43,7 @@ export function ArenaIspovest(props) {
           <span title={"Superlajk (jedan dnevno)"}>🌠</span>
         </Col>
         <Col
-          onClick={handleLikeClick}
+          onClick={() => handleLikeClick(ispovest.id)}
           style={{
             cursor: "pointer",
             color: "red",
