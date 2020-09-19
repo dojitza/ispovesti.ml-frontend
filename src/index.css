@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Rokkitt&display=swap");
+
 .ispovest {
   border-style: none;
   border-radius: 10px;
@@ -34,14 +36,9 @@ body {
 div {
   color: lightgray;
   font-size: large;
+  font-family: "Rokkitt", serif;
 }
-.jumbotron {
-  opacity: 0;
-  color: lightgray;
-}
-.navbar {
-  color: lightgray;
-}
+
 .button {
   background: none;
   border: none;
@@ -78,16 +75,22 @@ div {
   margin-right: 0;
 }
 
+.jumbotron {
+  background: url("static/bluembo.jpg") no-repeat -9999px -9999px;
+}
+
 .my-modal .modal-content {
-  background-image: url("static/bluembo.jpg");
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("static/bluembo.jpg");
+
   border-style: none;
   border-width: 1px;
   border-color: rgba(211, 211, 211, 0.4);
   border-radius: 10px;
-}
-
-.modal-backdrop {
-  opacity: 0 !important;
 }
 
 html,

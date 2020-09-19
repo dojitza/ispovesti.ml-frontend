@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Modal, Container, Row, Col, Button, Jumbotron } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ArenaIspovest } from "./ArenaIspovest";
-
+import { ArenaIntro } from "./ArenaIntro";
 import { constants } from "./constants";
 
 import "./index.css";
 
-export function Arena() {
+export function Arena(props) {
+  const { showIntro, setUserData, userData } = props;
   const [arenaIspovesti, setArenaIspovesti] = useState([]);
   const [show, setShow] = useState(false);
 
@@ -54,12 +55,18 @@ export function Arena() {
   };
 
   const handleSuperlikeClick = (ispovestId) => {
-    handleReactionClick(ispovestId, "superlike");
+    if (userData.superlikesLeft > 0) {
+      setUserData({ ...userData, superlikesLeft: userData.superlikesLeft - 1 });
+      handleReactionClick(ispovestId, "superlike");
+    } else {
+      alert("Utrošili ste sve superlajkove!");
+    }
   };
 
   return (
     <>
       <button
+        title="Arena"
         disabled={arenaIspovesti.length === 0}
         className="button"
         variant="dark"
@@ -73,7 +80,7 @@ export function Arena() {
           color: "lightGray",
         }}
       >
-        Arena
+        <span>Arena</span>
       </button>
 
       <Modal
@@ -86,13 +93,21 @@ export function Arena() {
         animation={true}
       >
         <Modal.Body>
-          {arenaIspovesti.length > 0 && (
-            <ArenaIspovest
-              ispovest={arenaIspovesti[0]}
-              handleLikeClick={handleLikeClick}
-              handleDislikeClick={handleDislikeClick}
-              handleSuperlikeClick={handleSuperlikeClick}
+          {showIntro ? (
+            <ArenaIntro
+              handleEnterArenaClick={() =>
+                setUserData({ ...userData, arenaIntroCompleted: true })
+              }
             />
+          ) : (
+            arenaIspovesti.length > 0 && (
+              <ArenaIspovest
+                ispovest={arenaIspovesti[0]}
+                handleLikeClick={handleLikeClick}
+                handleDislikeClick={handleDislikeClick}
+                handleSuperlikeClick={handleSuperlikeClick}
+              />
+            )
           )}
         </Modal.Body>
       </Modal>
