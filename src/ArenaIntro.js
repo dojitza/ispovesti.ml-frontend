@@ -12,22 +12,24 @@ export const ArenaIntro = (props) => {
         justifyContent: "center",
       }}
     >
-      <img style={{ objectFit: "contain" }} src={robotivs} alt="Arena" />
+      <img
+        style={{ objectFit: "contain", marginTop: -25 }}
+        src={robotivs}
+        alt="Arena"
+      />
       <div
         style={{
-          fontSize: "larger",
+          fontSize: "normal",
           fontWeight: "bold",
           background: "rgba(0,0,0,0.4)",
           borderRadius: 10,
           padding: 10,
         }}
       >
-        Dobrodošli u arenu! Ovde odlučujete o sudbini robotovih ispovesti. Ako
-        vam se ispovest sviđa, svajpujte desno (pritisnite srce), ako vam se
-        ispovest ne sviđa svajpujte levo (pritisnite x), a ako vam se ispovest
-        posebno dopada, možete da ju superlajkujte (pritisnite zvezdu). No
-        pazite! Svaki dan dodeljen vam je tek jedan superlajk, pazite kako ćete
-        da ga utrošite! Prijatno.
+        Dobrodošli u arenu! Ovde odlučujete o sudbini robotovih ispovesti.
+        Ispovesti možete da lajkujete, dislajkujete i superlajkujete. No pazite!
+        Superlajk vredi više i svaki dan dodeljen vam je tek jedan, pazite kako
+        ćete da ga utrošite! Prijatno.
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <button
