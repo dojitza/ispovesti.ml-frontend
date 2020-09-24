@@ -30,7 +30,7 @@ export function Ispovest(props) {
               onClick={() => {
                 handleLikeClick(ispovest.id);
               }}
-              disabled={ispovest.timesLiked > 0 || ispovest.timesDisliked > 0}
+              disabled={ispovest.timesLiked > 0}
               style={
                 ispovest.timesLiked > 0
                   ? { backgroundColor: "rgba(50, 50, 50, 0.5)" }
@@ -55,7 +55,7 @@ export function Ispovest(props) {
               onClick={() => {
                 handleDislikeClick(ispovest.id);
               }}
-              disabled={ispovest.timesLiked > 0 || ispovest.timesDisliked > 0}
+              disabled={ispovest.timesDisliked > 0}
               style={
                 ispovest.timesDisliked > 0
                   ? { backgroundColor: "rgba(50, 50, 50, 0.5)" }

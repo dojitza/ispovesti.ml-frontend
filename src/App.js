@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Jumbotron } from "react-bootstrap";
+import { Container, Row, Col, Jumbotron, Pagination } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { constants } from "./constants";
 import { Arena } from "./Arena";
+import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 
 import { Ispovesti } from "./Ispovesti";
 
@@ -54,15 +55,57 @@ function App() {
             <Ispovesti />
           </Col>
         </Row>
-        <Row>
-          <Col align="center">
-            <Arena
-              showIntro={!userData?.arenaIntroCompleted}
-              setUserData={setUserData}
-              userData={userData}
+        <Row style={{ marginTop: 50, marginBottom: 50 }}>
+          <Col style={{ display: "flex", justifyContent: "center" }}>
+            <IoMdArrowRoundBack
+              style={{
+                fontSize: 80,
+                color: "whitesmoke",
+                background: "rgba(0,0,0,0.4)",
+                borderRadius: 10,
+                padding: 10,
+              }}
+            />
+          </Col>
+          <Col style={{ display: "flex", justifyContent: "center" }}>
+            <span
+              style={{
+                textAlign: "center",
+                fontSize: 80,
+                color: "whitesmoke",
+                background: "rgba(0,0,0,0.4)",
+                borderRadius: 10,
+                width: 80,
+                lineHeight: 1,
+              }}
+            >
+              {1}
+            </span>
+          </Col>
+          <Col
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <IoMdArrowRoundForward
+              style={{
+                fontSize: 80,
+                color: "whitesmoke",
+                background: "rgba(0,0,0,0.4)",
+                borderRadius: 10,
+                padding: 10,
+              }}
             />
           </Col>
         </Row>
+        <Col style={{ display: "flex", justifyContent: "center" }}>
+          <Arena
+            showIntro={!userData?.arenaIntroCompleted}
+            setUserData={setUserData}
+            userData={userData}
+          />
+        </Col>
       </Container>
     </div>
   );

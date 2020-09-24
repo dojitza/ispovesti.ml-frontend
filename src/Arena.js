@@ -78,6 +78,7 @@ export function Arena(props) {
               ? "rgba(0, 0, 0, 0.66)"
               : "rgba(50, 50, 50, 0.66)",
           color: "lightGray",
+          lineHeight: 2,
         }}
       >
         <span>Arena</span>

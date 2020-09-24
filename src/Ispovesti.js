@@ -27,38 +27,42 @@ export function Ispovesti(props) {
     fetchData();
   }, []);
 
-  const handleLikeClick = (ispovestId) => {
-    fetch(`${constants.API_ROOT}/ispovesti/${ispovestId}/postLike`, {
-      method: "post",
+  const handleReactionClick = (ispovestId, reaction) => {
+    fetch(`${constants.API_ROOT}/ispovesti/${ispovestId}/putReaction`, {
+      method: "put",
       headers: {
         "Content-Type": "application/json",
       },
-      body: {},
+      body: JSON.stringify(reaction),
     });
     const newIspovesti = ispovesti;
-    const i = ispovesti.findIndex((ispovest) => ispovest.id === ispovestId);
-    const newIspovest = ispovesti[i];
-    newIspovest.timesLiked += 1;
-    newIspovest.likes += 1;
-    newIspovesti[i] = newIspovest;
+    const ito = newIspovesti.find((ispovest) => ispovest.id === ispovestId);
+    if (reaction === "like") {
+      ito.timesLiked += 1;
+      ito.likes += 1;
+      if (ito.reactedInRuntime) {
+        ito.timesDisliked -= 1;
+        ito.dislikes -= 1;
+      }
+    } else if (reaction === "dislike") {
+      ito.timesDisliked += 1;
+      ito.dislikes += 1;
+      if (ito.reactedInRuntime) {
+        ito.timesLiked -= 1;
+        ito.likes -= 1;
+      }
+    }
+    ito.reactedInRuntime = true;
+    console.log(ito);
     setIspovesti(JSON.parse(JSON.stringify(newIspovesti)));
   };
 
+  const handleLikeClick = (ispovestId) => {
+    handleReactionClick(ispovestId, "like");
+  };
+
   const handleDislikeClick = (ispovestId) => {
-    fetch(`${constants.API_ROOT}/ispovesti/${ispovestId}/postDislike`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: {},
-    });
-    const newIspovesti = ispovesti;
-    const i = ispovesti.findIndex((ispovest) => ispovest.id === ispovestId);
-    const newIspovest = ispovesti[i];
-    newIspovest.timesDisliked += 1;
-    newIspovest.dislikes += 1;
-    newIspovesti[i] = newIspovest;
-    setIspovesti(JSON.parse(JSON.stringify(newIspovesti)));
+    handleReactionClick(ispovestId, "dislike");
   };
 
   return (
