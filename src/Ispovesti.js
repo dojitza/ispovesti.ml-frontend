@@ -5,9 +5,13 @@ import { constants } from "./constants";
 import { Arena } from "./Arena";
 import { Ispovest } from "./Ispovest";
 import seedrandom from "seedrandom";
+import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
+import { Pagination } from "./Pagination.js";
 
 export function Ispovesti(props) {
   const [ispovesti, setIspovesti] = useState([]);
+  const [page, setPage] = useState(0);
+  const [waitingForAsync, setWaitingForAysnc] = useState(false);
   seedrandom(localStorage.getItem("randomSeed"), { global: true });
 
   const likes = constants.LIKE_VARIATIONS;
@@ -16,7 +20,9 @@ export function Ispovesti(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${constants.API_ROOT}/ispovesti`);
+        const response = await fetch(
+          `${constants.API_ROOT}/ispovesti?page=${page}`
+        );
         const ispovesti = await response.json();
         setIspovesti(ispovesti);
       } catch (e) {
@@ -25,9 +31,10 @@ export function Ispovesti(props) {
     };
 
     fetchData();
-  }, []);
+  }, [page]);
 
   const handleReactionClick = (ispovestId, reaction) => {
+    setWaitingForAysnc(true);
     fetch(`${constants.API_ROOT}/ispovesti/${ispovestId}/putReaction`, {
       method: "put",
       headers: {
@@ -55,6 +62,7 @@ export function Ispovesti(props) {
     ito.reactedInRuntime = true;
     console.log(ito);
     setIspovesti(JSON.parse(JSON.stringify(newIspovesti)));
+    setWaitingForAysnc(false);
   };
 
   const handleLikeClick = (ispovestId) => {
@@ -67,6 +75,11 @@ export function Ispovesti(props) {
 
   return (
     <div>
+      <Pagination
+        page={page}
+        setPage={setPage}
+        waitingForAsync={waitingForAsync}
+      />
       {ispovesti?.map((ispovest) => (
         <Ispovest
           key={ispovest.id}
@@ -77,6 +90,7 @@ export function Ispovesti(props) {
           handleDislikeClick={handleDislikeClick}
         />
       ))}
+      <Pagination page={page} setPage={setPage} />
     </div>
   );
 }

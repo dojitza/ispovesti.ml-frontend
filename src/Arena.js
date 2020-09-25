@@ -77,7 +77,7 @@ export function Arena(props) {
             arenaIspovesti.length > 0
               ? "rgba(0, 0, 0, 0.66)"
               : "rgba(50, 50, 50, 0.66)",
-          color: "lightGray",
+          color: "whitesmoke",
           lineHeight: 2,
         }}
       >

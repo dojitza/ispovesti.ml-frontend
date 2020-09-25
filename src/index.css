@@ -93,9 +93,9 @@ div {
   border-radius: 10px;
 }
 
-html,
-body,
-#app,
+.body {
+  margin-top: -100;
+}
 #app > div {
   height: 100%;
 }
