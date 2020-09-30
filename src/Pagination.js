@@ -8,7 +8,14 @@ import seedrandom from "seedrandom";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 
 export const Pagination = (props) => {
-  const { page, setPage, waitingForAsync } = props;
+  const {
+    page,
+    setPage,
+    waitingForAsync,
+    disableRight,
+    disableLeft = page <= 0,
+  } = props;
+
   return (
     <Row style={{ marginTop: 20, marginBottom: 20 }}>
       <Col
@@ -20,11 +27,12 @@ export const Pagination = (props) => {
         <IoMdArrowRoundBack
           style={{
             fontSize: 80,
-            color: "whitesmoke",
+            color: disableLeft ? "grey" : "whitesmoke",
             background: "rgba(0,0,0,0.66)",
             borderRadius: 10,
             padding: 10,
             cursor: "pointer",
+            pointerEvents: disableLeft ? "none" : null,
           }}
           onClick={() => setPage(page - 1)}
         />
@@ -54,11 +62,12 @@ export const Pagination = (props) => {
         <IoMdArrowRoundForward
           style={{
             fontSize: 80,
-            color: "whitesmoke",
+            color: disableRight ? "grey" : "whitesmoke",
             background: "rgba(0,0,0,0.66)",
             borderRadius: 10,
             padding: 10,
             cursor: "pointer",
+            pointerEvents: disableRight ? "none" : null,
           }}
           onClick={() => setPage(page + 1)}
         />
