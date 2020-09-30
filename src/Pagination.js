@@ -50,7 +50,7 @@ export const Pagination = (props) => {
             paddingRight: 20,
           }}
         >
-          {waitingForAsync ? "spinner" : page}
+          {waitingForAsync ? "spinner" : page + 1}
         </span>
       </Col>
       <Col

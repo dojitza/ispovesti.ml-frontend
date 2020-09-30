@@ -66,22 +66,27 @@ export function Arena(props) {
   return (
     <>
       <button
-        title="Arena"
-        disabled={arenaIspovesti.length === 0}
+        title="Sudi robotu"
         className="button"
         variant="dark"
-        onClick={handleShow}
+        onClick={() =>
+          arenaIspovesti.length > 0
+            ? handleShow()
+            : alert("Nema više ispovesti u areni, vratite se sutra!")
+        }
         style={{
           fontSize: 36,
           backgroundColor:
             arenaIspovesti.length > 0
-              ? "rgba(0, 0, 0, 0.66)"
-              : "rgba(50, 50, 50, 0.66)",
-          color: "whitesmoke",
+              ? "rgba(200, 200, 200, 0.66)"
+              : "rgba(100, 100, 100, 0.66)",
+          color: "black",
           lineHeight: 2,
+          margin: 60,
+          marginBottom: 100,
         }}
       >
-        <span>Arena</span>
+        <span>Sudi robotu</span>
       </button>
 
       <Modal

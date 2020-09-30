@@ -50,21 +50,21 @@ function App() {
         >
           Ispovesti.ml
         </div>
-        <Col style={{ display: "flex", justifyContent: "center" }}>
-          <Arena
-            showIntro={!userData?.arenaIntroCompleted}
-            setUserData={setUserData}
-            userData={userData}
-          />
-        </Col>
       </Jumbotron>
-      <Container className="body" style={{ marginTop: -50 }}>
+      <Container className="body" style={{ marginTop: -30 }}>
         <Row>
           <Col>
             <Ispovesti />
           </Col>
         </Row>
       </Container>
+      <Col style={{ display: "flex", justifyContent: "center" }}>
+        <Arena
+          showIntro={!userData?.arenaIntroCompleted}
+          setUserData={setUserData}
+          userData={userData}
+        />
+      </Col>
     </div>
   );
 }
