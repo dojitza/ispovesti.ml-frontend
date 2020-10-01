@@ -19,6 +19,7 @@ export function Ispovesti(props) {
 
   useEffect(() => {
     const fetchData = async () => {
+      setWaitingForAysnc(true);
       try {
         const response = await fetch(
           `${constants.API_ROOT}/ispovesti?page=${page}`
@@ -28,8 +29,8 @@ export function Ispovesti(props) {
       } catch (e) {
         console.log(e);
       }
+      setWaitingForAysnc(false);
     };
-
     fetchData();
   }, [page]);
 

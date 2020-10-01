@@ -35,6 +35,7 @@ export const Pagination = (props) => {
             pointerEvents: disableLeft ? "none" : null,
           }}
           onClick={() => setPage(page - 1)}
+          disabled={waitingForAsync}
         />
       </Col>
       <Col style={{ display: "flex", justifyContent: "center" }}>
@@ -70,6 +71,7 @@ export const Pagination = (props) => {
             pointerEvents: disableRight ? "none" : null,
           }}
           onClick={() => setPage(page + 1)}
+          disabled={waitingForAsync}
         />
       </Col>
     </Row>
