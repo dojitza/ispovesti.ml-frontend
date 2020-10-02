@@ -80,7 +80,7 @@ export function Ispovesti(props) {
         page={page}
         setPage={setPage}
         waitingForAsync={waitingForAsync}
-        disableRight={ispovesti.length < 10}
+        reachedEndFlag={ispovesti.length < 10}
       />
       {ispovesti?.map((ispovest) => (
         <Ispovest
@@ -96,7 +96,7 @@ export function Ispovesti(props) {
         page={page}
         setPage={setPage}
         waitingForAsync={waitingForAsync}
-        disableRight={ispovesti.length < 10}
+        reachedEndFlag={ispovesti.length < 10}
       />
     </div>
   );
