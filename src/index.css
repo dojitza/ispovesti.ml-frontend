@@ -33,6 +33,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
 div {
   color: lightgray;
   font-size: large;
@@ -93,9 +94,13 @@ div {
   border-radius: 10px;
 }
 
-.body {
+.content {
   margin-top: -100;
 }
 #app > div {
   height: 100%;
+}
+
+.mainLink:hover {
+  text-decoration: none;
 }

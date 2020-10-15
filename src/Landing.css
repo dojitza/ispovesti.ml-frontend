@@ -1,0 +1,54 @@
+.landingButton {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.66);
+  color: whitesmoke;
+  font-size: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  margin: 10px;
+  width: 300px;
+  line-height: 50px;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+.landingButton:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.generiraj {
+  background-color: rgba(30, 120, 30, 0.8);
+  border-color: black;
+  border-style: solid;
+  color: black;
+}
+.generiraj:hover {
+  color: black;
+}
+
+.citaj {
+  border-color: black;
+  border-style: solid;
+  color: lightgray;
+}
+
+.citaj:hover {
+  color: lightgray;
+}
+
+.landingCol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landingContainer {
+  min-height: 65%; /* Fallback for browsers do NOT support vh unit */
+  min-height: 65vh; /* These two lines are counted as one :-)       */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
