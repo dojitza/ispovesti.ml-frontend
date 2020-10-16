@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Modal, Row, Col } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 export function Ispovest(props) {
   const {
@@ -9,10 +8,11 @@ export function Ispovest(props) {
     dislikes,
     handleDislikeClick,
     handleLikeClick,
+    extraCssClass,
   } = props;
 
   return (
-    <Row style={{ margin: 5 }} className="ispovest">
+    <Row style={{ margin: 5 }} className={`ispovest ${extraCssClass}`}>
       <Col>
         <Col className="ispovestText">{ispovest.text}</Col>
         <Row className="reactionContainer">

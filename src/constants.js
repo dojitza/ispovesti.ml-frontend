@@ -9,4 +9,10 @@ export const constants = {
     "Sočno",
   ],
   DISLIKE_VARIATIONS: ["Osuđujem", "Loše sestro", "Slabo jarane", "Mizerija"],
+  SUPERLIKE_VARIATIONS: [
+    "Brateeeeeeeeeeeeee",
+    "E pocepo si ga skroz svaka cast",
+    "Prosto ne mogu da verujem",
+    "Najjača dosad",
+  ],
 };

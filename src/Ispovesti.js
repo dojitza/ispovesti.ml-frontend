@@ -8,7 +8,7 @@ import seedrandom from "seedrandom";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import { Pagination } from "./Pagination.js";
 
-export function Ispovesti(props) {
+export function Ispovesti(pops) {
   const [ispovesti, setIspovesti] = useState([]);
   const [page, setPage] = useState(0);
   const [waitingForAsync, setWaitingForAysnc] = useState(false);
@@ -45,17 +45,18 @@ export function Ispovesti(props) {
     });
     const newIspovesti = ispovesti;
     const ito = newIspovesti.find((ispovest) => ispovest.id === ispovestId);
+    const alreadyReacted = ito.timesLiked + ito.timesDisliked > 0;
     if (reaction === "like") {
       ito.timesLiked += 1;
       ito.likes += 1;
-      if (ito.reactedInRuntime) {
+      if (alreadyReacted) {
         ito.timesDisliked -= 1;
         ito.dislikes -= 1;
       }
     } else if (reaction === "dislike") {
       ito.timesDisliked += 1;
       ito.dislikes += 1;
-      if (ito.reactedInRuntime) {
+      if (alreadyReacted) {
         ito.timesLiked -= 1;
         ito.likes -= 1;
       }

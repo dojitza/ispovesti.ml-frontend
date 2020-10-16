@@ -4,46 +4,71 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ArenaIspovest } from "./ArenaIspovest";
 import { ArenaIntro } from "./ArenaIntro";
 import { constants } from "./constants";
+import seedrandom from "seedrandom";
+import { Ispovest } from "./Ispovest";
+import { Pagination } from "./Pagination.js";
+import { IspovestGenerationModal } from "./IspovestGenerationModal";
+import "./Arena.css";
 
-import "./index.css";
+export function Arena() {
+  const [ispovesti, setIspovesti] = useState([]);
+  const [page, setPage] = useState(0);
+  const [waitingForAsync, setWaitingForAysnc] = useState(false);
+  const [showGenerationModal, setShowGenerationModal] = useState(false);
+  seedrandom(localStorage.getItem("randomSeed"), { global: true });
 
-export function Arena(props) {
-  const { showIntro, setUserData, userData } = props;
-  const [arenaIspovesti, setArenaIspovesti] = useState([]);
-  const [show, setShow] = useState(false);
+  const likes = constants.LIKE_VARIATIONS;
+  const superlikes = constants.SUPERLIKE_VARIATIONS;
+  const dislikes = constants.DISLIKE_VARIATIONS;
+
+  const generatedToday = false;
 
   useEffect(() => {
     const fetchData = async () => {
+      setWaitingForAysnc(true);
       try {
-        const response = await fetch(`${constants.API_ROOT}/arenaIspovesti`);
-        const arenaIspovesti = await response.json();
-        setArenaIspovesti(arenaIspovesti);
+        const response = await fetch(
+          `${constants.API_ROOT}/arenaIspovesti?page=${page}`
+        );
+        const ispovesti = await response.json();
+        setIspovesti(ispovesti);
       } catch (e) {
         console.log(e);
       }
+      setWaitingForAysnc(false);
     };
     fetchData();
-  }, []);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  }, [page]);
 
   const handleReactionClick = (ispovestId, reaction) => {
-    if (arenaIspovesti.length === 1) {
-      setShow(false);
-      setTimeout(() => setArenaIspovesti(arenaIspovesti.slice(1)), 1000);
-      alert("Svajpali ste sve ispovesti u današnjoj areni");
-    } else {
-      setArenaIspovesti(arenaIspovesti.slice(1));
-    }
-
-    fetch(`${constants.API_ROOT}/arenaIspovesti/${ispovestId}/postReaction`, {
-      method: "post",
+    setWaitingForAysnc(true);
+    fetch(`${constants.API_ROOT}/arenaIspovesti/${ispovestId}/putReaction`, {
+      method: "put",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(reaction),
     });
+    const newIspovesti = ispovesti;
+    const ito = newIspovesti.find((ispovest) => ispovest.id === ispovestId);
+    const alreadyReacted = ito.timesLiked + ito.timesDisliked > 0;
+    if (reaction === "like") {
+      ito.timesLiked += 1;
+      ito.likes += 1;
+      if (alreadyReacted) {
+        ito.timesDisliked -= 1;
+        ito.dislikes -= 1;
+      }
+    } else if (reaction === "dislike") {
+      ito.timesDisliked += 1;
+      ito.dislikes += 1;
+      if (alreadyReacted) {
+        ito.timesLiked -= 1;
+        ito.likes -= 1;
+      }
+    }
+    setIspovesti(JSON.parse(JSON.stringify(newIspovesti)));
+    setWaitingForAysnc(false);
   };
 
   const handleLikeClick = (ispovestId) => {
@@ -55,68 +80,54 @@ export function Arena(props) {
   };
 
   const handleSuperlikeClick = (ispovestId) => {
-    if (userData.superlikesLeft > 0) {
-      setUserData({ ...userData, superlikesLeft: userData.superlikesLeft - 1 });
-      handleReactionClick(ispovestId, "superlike");
-    } else {
-      alert("Utrošili ste sve superlajkove!");
-    }
+    handleReactionClick(ispovestId, "superlike");
   };
 
   return (
     <>
-      <button
-        title="Sudi robotu"
-        className="button"
-        variant="dark"
-        onClick={() =>
-          arenaIspovesti.length > 0
-            ? handleShow()
-            : alert("Nema više ispovesti u areni, vratite se sutra!")
-        }
-        style={{
-          fontSize: 36,
-          backgroundColor:
-            arenaIspovesti.length > 0
-              ? "rgba(200, 200, 200, 0.66)"
-              : "rgba(100, 100, 100, 0.66)",
-          color: "black",
-          lineHeight: 2,
-          margin: 60,
-          marginBottom: 100,
-        }}
-      >
-        <span>Sudi robotu</span>
-      </button>
-
-      <Modal
-        size="m"
-        centered="true"
-        show={show}
-        onHide={handleClose}
-        backdrop={true}
-        className="my-modal"
-        animation={true}
-      >
-        <Modal.Body>
-          {showIntro ? (
-            <ArenaIntro
-              handleEnterArenaClick={() =>
-                setUserData({ ...userData, arenaIntroCompleted: true })
-              }
-            />
-          ) : (
-            arenaIspovesti.length > 0 && (
-              <ArenaIspovest
-                ispovest={arenaIspovesti[0]}
-                handleLikeClick={handleLikeClick}
-                handleDislikeClick={handleDislikeClick}
-                handleSuperlikeClick={handleSuperlikeClick}
-              />
-            )
-          )}
-        </Modal.Body>
-      </Modal>
+      <IspovestGenerationModal
+        showGenerationModal={showGenerationModal}
+        setShowGenerationModal={setShowGenerationModal}
+      />
+      <div>
+        <div className="ispovestGenerationModalButtonContainer">
+          <button
+            title="Generiraj novu ispovest"
+            className="ispovestGenerationModalButton"
+            variant="dark"
+            onClick={() =>
+              !generatedToday
+                ? setShowGenerationModal(true)
+                : alert("Nema više ispovesti u areni, vratite se sutra!")
+            }
+          >
+            <span>Generiraj novu ispovest</span>
+          </button>
+        </div>
+        <Pagination
+          page={page}
+          setPage={setPage}
+          waitingForAsync={waitingForAsync}
+          reachedEndFlag={ispovesti.length < 10}
+        />
+        {ispovesti?.map((ispovest) => (
+          <Ispovest
+            extraCssClass="arenaIspovest"
+            key={ispovest.id}
+            ispovest={ispovest}
+            likes={likes}
+            dislikes={dislikes}
+            handleLikeClick={handleLikeClick}
+            handleDislikeClick={handleDislikeClick}
+          />
+        ))}
+        <Pagination
+          page={page}
+          setPage={setPage}
+          waitingForAsync={waitingForAsync}
+          reachedEndFlag={ispovesti.length < 10}
+        />
+      </div>
     </>
   );
 }

@@ -67,7 +67,15 @@ function App() {
               </Row>
             </Container>
           </Route>
-          <Route path="/generated"></Route>
+          <Route path="/generated">
+            <Container className="body" style={{ marginTop: -30 }}>
+              <Row>
+                <Col>
+                  <Arena />
+                </Col>
+              </Row>
+            </Container>
+          </Route>
           <Route path="/">
             <Landing />
           </Route>
