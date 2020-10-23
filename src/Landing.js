@@ -14,7 +14,7 @@ export function Landing() {
         </Col>
         <Col className="landingCol">
           <Link to="/published" className="landingButton citaj">
-            Čitaj stare i komentiraj
+            Čitaj stare
           </Link>
         </Col>
       </Row>

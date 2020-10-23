@@ -1,0 +1,50 @@
+.authorName {
+  color: rgb(129, 129, 129);
+  padding-left: 5px;
+  font-size: 16px;
+}
+
+.reaction {
+  padding-right: 0px;
+}
+
+.authorNameContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+
+.ispovest {
+  border-style: none;
+  border-radius: 10px;
+  border-color: rgba(211, 211, 211, 0.4);
+  border-width: 2px;
+  margin: 10px;
+  margin-left: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-right: 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.ispovestText {
+  border-style: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 0px;
+  margin-left: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: larger;
+}
+
+.reactionContainer {
+  align-items: flex-end;
+  padding: 15px;
+  padding-bottom: 0px;
+}
+
+.reactionCol {
+  height: 27px;
+  padding-right: 0px;
+  padding-left: 0px;
+}

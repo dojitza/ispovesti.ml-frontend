@@ -9,23 +9,6 @@ import { Landing } from "./Landing";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${constants.API_ROOT}/user`);
-        const userData = await response.json();
-        setUserData(userData);
-        console.log(userData);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <Router>
       <div className="content">

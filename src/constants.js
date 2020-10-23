@@ -15,4 +15,5 @@ export const constants = {
     "Prosto ne mogu da verujem",
     "Najjača dosad",
   ],
+  SUBMISSION_THRESHOLD_SECONDS: 43200,
 };

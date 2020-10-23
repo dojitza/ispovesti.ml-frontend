@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, Row, Col } from "react-bootstrap";
+import "./Ispovest.css";
 
 export function Ispovest(props) {
   const {
@@ -17,12 +18,13 @@ export function Ispovest(props) {
         <Col className="ispovestText">{ispovest.text}</Col>
         <Row className="reactionContainer">
           <Col
-            className="reaction"
+            className="reactionCol"
             xl="auto"
             lg="auto"
             md="auto"
             sm="auto"
             xs="auto"
+            style={{ paddingRight: 5 }}
           >
             <button
               className="button"
@@ -42,7 +44,7 @@ export function Ispovest(props) {
             <span className="reactionCount">{ispovest.likes}</span>
           </Col>
           <Col
-            className="reaction"
+            className="reactionCol "
             xl="auto"
             lg="auto"
             md="auto"
@@ -65,6 +67,11 @@ export function Ispovest(props) {
               {dislikes[Math.floor(Math.random() * dislikes.length)]}
             </button>
             <span className="reactionCount">{ispovest.dislikes}</span>
+          </Col>
+          <Col className="reactionCol">
+            <div className="authorNameContainer">
+              <span className="authorName">{ispovest.authorName}</span>
+            </div>
           </Col>
         </Row>
       </Col>

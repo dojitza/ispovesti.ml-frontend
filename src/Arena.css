@@ -16,7 +16,12 @@
   border-color: black;
   border-style: solid;
   color: black;
-  width: 100%;
+  min-width: 210px;
+}
+
+.ispovestGenerationModalButtonDisabled {
+  cursor: not-allowed;
+  background-color: rgba(30, 120, 30, 0.7);
 }
 
 .ispovestGenerationModalButtonContainer {
@@ -43,16 +48,19 @@
 
 .continueButton {
   display: inline-block;
-  font-size: 36px;
+  font-size: 25px;
   background-color: rgba(0, 0, 0, 0.6);
   color: lightGray;
-  width: 175px;
+  width: 125px;
+}
+
+.mozeButton {
+  font-size: 40px;
 }
 
 .disabledButton {
-  background-color: rgba(50, 50, 50, 0.3);
   color: rgba(255, 255, 255, 0.3);
-  cursor: auto;
+  cursor: not-allowed;
 }
 
 .modalText {
@@ -60,7 +68,19 @@
 }
 
 .modalCol {
+  margin: 5px;
+  padding-left: 0px;
+  padding-right: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modalInput {
+  margin-bottom: 20px;
+}
+
+.generatedIspovestText {
+  margin: 30px;
+  text-align: center;
 }

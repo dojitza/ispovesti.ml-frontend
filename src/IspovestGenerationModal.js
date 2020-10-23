@@ -5,10 +5,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { constants } from "./constants";
 
 export function IspovestGenerationModal(props) {
-  const { showGenerationModal, setShowGenerationModal } = props;
+  const { fetchIspovesti, showGenerationModal, setShowGenerationModal } = props;
   const [showIntro, setShowIntro] = useState(true);
-  const [generatedIspovest, setGeneratedIspovest] = useState("");
+  const [generatedIspovest, setGeneratedIspovest] = useState({
+    id: null,
+    text: "Ovde će da se prikaže generisovana ispovest",
+  });
   const [prefix, setPrefix] = useState("");
+  const [authorName, setAuthorName] = useState("");
   const [waitingForGeneration, setWaitingForGeneration] = useState(false);
 
   const sendGenerateRequest = async (prefix) => {
@@ -20,7 +24,25 @@ export function IspovestGenerationModal(props) {
     setWaitingForGeneration(false);
   };
 
-  const publishIspovest = async (prefix) => {};
+  const publishIspovest = async (id, authorName) => {
+    const response = await fetch(
+      `${constants.API_ROOT}/publishIspovest?ispovestId=${id}&authorName=${authorName}`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(""),
+      }
+    );
+    if (response.ok) {
+      alert("Uspešno objavljeno");
+      setShowGenerationModal(false);
+      fetchIspovesti();
+    } else {
+      alert("Došlo je do greške, probajte opet");
+    }
+  };
 
   return (
     <Modal
@@ -52,7 +74,7 @@ export function IspovestGenerationModal(props) {
             <Row className="modalRow buttonRow">
               <button
                 title="Može"
-                className="button continueButton"
+                className="button continueButton mozeButton"
                 onClick={() => setShowIntro(false)}
               >
                 Može
@@ -62,10 +84,10 @@ export function IspovestGenerationModal(props) {
         ) : (
           <>
             <Row className="modalRow modalText">Početak ispovesti</Row>
-            <Row className="modalRow">
+            <Row className="modalRow modalInput">
               <input
                 type="text"
-                maxlength="20"
+                maxLength="20"
                 value={prefix}
                 onChange={(event) => setPrefix(event.target.value)}
               />
@@ -82,8 +104,7 @@ export function IspovestGenerationModal(props) {
                 Generiraj
               </button>
             </Row>
-
-            <Row className="modalRow ispovestText">
+            <Row className="modalRow ispovestText generatedIspovestText">
               {waitingForGeneration ? (
                 <Spinner
                   style={{ padding: 30 }}
@@ -93,12 +114,17 @@ export function IspovestGenerationModal(props) {
                   <span className="sr-only">Loading...</span>
                 </Spinner>
               ) : (
-                generatedIspovest
+                generatedIspovest.text
               )}
             </Row>
             <Row className="modalRow modalText">Vaše ime</Row>
-            <Row className="modalRow">
-              <input type="text" maxlength="20" />
+            <Row className="modalRow modalInput">
+              <input
+                type="text"
+                maxLength="20"
+                value={authorName}
+                onChange={(event) => setAuthorName(event.target.value)}
+              />
             </Row>
             <Row className="modalRow">
               <Col className="modalCol">
@@ -112,7 +138,7 @@ export function IspovestGenerationModal(props) {
                       "Da li ste sigurni da želite objaviti ispovest?"
                     );
                     if (r == true) {
-                      publishIspovest(generatedIspovest);
+                      publishIspovest(generatedIspovest.id, authorName);
                       setShowGenerationModal(false);
                     }
                   }}
