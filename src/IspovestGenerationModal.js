@@ -3,6 +3,7 @@ import { Modal, Row, Col, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { constants } from "./constants";
+import { toHHMMSS } from "./helpers";
 
 export function IspovestGenerationModal(props) {
   const { fetchIspovesti, showGenerationModal, setShowGenerationModal } = props;
@@ -11,16 +12,44 @@ export function IspovestGenerationModal(props) {
     id: null,
     text: "Ovde će da se prikaže generisovana ispovest",
   });
+  const [queuePosition, setQueuePosition] = useState(-1);
   const [prefix, setPrefix] = useState("");
   const [authorName, setAuthorName] = useState("");
   const [waitingForGeneration, setWaitingForGeneration] = useState(false);
+  const [eta, setEta] = useState(-1);
+
+  useEffect(() => {
+    const tick = () => {
+      setEta(eta - 1);
+      if (eta == 1) {
+        setEta(9);
+      }
+    };
+    const intervalRef = setInterval(() => {
+      tick();
+    }, 1000);
+    return () => clearInterval(intervalRef);
+  });
+
+  const getQueuePosition = async () => {
+    const response = await fetch(`${constants.API_ROOT}/queueLength`);
+    const queuePosition = await response.json();
+    setQueuePosition(parseInt(queuePosition));
+    setEta((parseInt(queuePosition) + 1) * 60);
+  };
 
   const sendGenerateRequest = async (prefix) => {
     setWaitingForGeneration(true);
+
+    setGeneratedIspovest({ id: null, text: null });
+    await getQueuePosition();
+
     const response = await fetch(
       `${constants.API_ROOT}/generateIspovest?prefix=${prefix}`
     );
-    setGeneratedIspovest(await response.json());
+    const ispovest = await response.json();
+    setGeneratedIspovest(ispovest);
+
     setWaitingForGeneration(false);
   };
 
@@ -117,6 +146,12 @@ export function IspovestGenerationModal(props) {
                 generatedIspovest.text
               )}
             </Row>
+            {queuePosition >= 0 && !generatedIspovest.id && (
+              <Row className="modalRow queueInfoText">
+                Vaša ispovest je {queuePosition + 1} u redu čekanja, otprilike
+                vreme do završetka: {toHHMMSS(eta)}
+              </Row>
+            )}
             <Row className="modalRow modalText">Vaše ime</Row>
             <Row className="modalRow modalInput">
               <input

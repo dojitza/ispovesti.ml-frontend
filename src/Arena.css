@@ -55,6 +55,7 @@
 }
 
 .mozeButton {
+  margin: 10px;
   font-size: 40px;
 }
 
@@ -82,5 +83,11 @@
 
 .generatedIspovestText {
   margin: 30px;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+.queueInfoText {
+  margin-bottom: 30px;
   text-align: center;
 }
