@@ -24,6 +24,7 @@ export function Arena() {
   const [ispovesti, setIspovesti] = useState([]);
   const [page, setPage] = useState(0);
   const [waitingForAsync, setWaitingForAsync] = useState(false);
+  const [waitingForUserData, setWaitingForUserData] = useState(true);
   const [showGenerationModal, setShowGenerationModal] = useState(false);
   const [timeLeftForSubmit, setTimeLeftForSubmit] = useState(0);
   seedrandom(localStorage.getItem("randomSeed"), { global: true });
@@ -55,8 +56,7 @@ export function Arena() {
   };
 
   const tick = () => {
-    setTimeLeftForSubmit(timeLeftForSubmit - 1);
-    console.log(timeLeftForSubmit);
+    timeLeftForSubmit > 0 && setTimeLeftForSubmit(timeLeftForSubmit - 1);
   };
 
   const fetchUserData = async () => {
@@ -64,9 +64,12 @@ export function Arena() {
       const response = await fetch(`${constants.API_ROOT}/user`);
       const userData = await response.json();
       setUserData(userData);
+
       return userData;
     } catch (e) {
       console.log(e);
+    } finally {
+      setWaitingForUserData(false);
     }
   };
 
@@ -161,7 +164,7 @@ export function Arena() {
             disabled={timeLeftForSubmit > 0}
           >
             <span>
-              {waitingForAsync ? (
+              {waitingForUserData ? (
                 <Spinner
                   style={{ padding: 30 }}
                   animation="border"

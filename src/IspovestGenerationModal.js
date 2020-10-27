@@ -21,7 +21,10 @@ export function IspovestGenerationModal(props) {
   useEffect(() => {
     const tick = () => {
       setEta(eta - 1);
-      if (eta == 1) {
+      if (eta % 60 == 1) {
+        queuePosition > 0 && setQueuePosition(queuePosition - 1);
+      }
+      if (eta <= 1) {
         setEta(9);
       }
     };
@@ -148,7 +151,7 @@ export function IspovestGenerationModal(props) {
             </Row>
             {queuePosition >= 0 && !generatedIspovest.id && (
               <Row className="modalRow queueInfoText">
-                Vaša ispovest je {queuePosition + 1} u redu čekanja, otprilike
+                Vaša ispovest je {queuePosition + 1}. u redu čekanja, otprilike
                 vreme do završetka: {toHHMMSS(eta)}
               </Row>
             )}
