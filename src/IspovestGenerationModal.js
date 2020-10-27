@@ -6,7 +6,7 @@ import { constants } from "./constants";
 import { toHHMMSS } from "./helpers";
 
 export function IspovestGenerationModal(props) {
-  const { fetchIspovesti, showGenerationModal, setShowGenerationModal } = props;
+  const { fetchData, showGenerationModal, setShowGenerationModal } = props;
   const [showIntro, setShowIntro] = useState(true);
   const [generatedIspovest, setGeneratedIspovest] = useState({
     id: null,
@@ -16,6 +16,7 @@ export function IspovestGenerationModal(props) {
   const [prefix, setPrefix] = useState("");
   const [authorName, setAuthorName] = useState("");
   const [waitingForGeneration, setWaitingForGeneration] = useState(false);
+  const [waitingForPublish, setWaitingForPublish] = useState(false);
   const [eta, setEta] = useState(-1);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export function IspovestGenerationModal(props) {
   };
 
   const publishIspovest = async (id, authorName) => {
+    setWaitingForPublish(true);
     const response = await fetch(
       `${constants.API_ROOT}/publishIspovest?ispovestId=${id}&authorName=${authorName}`,
       {
@@ -70,10 +72,11 @@ export function IspovestGenerationModal(props) {
     if (response.ok) {
       alert("Uspešno objavljeno");
       setShowGenerationModal(false);
-      fetchIspovesti();
+      fetchData();
     } else {
       alert("Došlo je do greške, probajte opet");
     }
+    setWaitingForPublish(false);
   };
 
   return (

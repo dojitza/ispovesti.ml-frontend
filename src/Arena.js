@@ -145,7 +145,7 @@ export function Arena() {
   return (
     <>
       <IspovestGenerationModal
-        fetchIspovesti={fetchIspovesti}
+        fetchData={fetchData}
         showGenerationModal={showGenerationModal}
         setShowGenerationModal={setShowGenerationModal}
       />
@@ -161,7 +161,7 @@ export function Arena() {
             }
             variant="dark"
             onClick={() => setShowGenerationModal(true)}
-            disabled={timeLeftForSubmit > 0}
+            disabled={timeLeftForSubmit > 0 || waitingForUserData}
           >
             <span>
               {waitingForUserData ? (
