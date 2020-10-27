@@ -53,9 +53,7 @@ function App() {
           <Route path="/generated">
             <Container className="body" style={{ marginTop: -30 }}>
               <Row>
-                <Col>
-                  <Arena />
-                </Col>
+                <Col>{/*<Arena />*/}</Col>
               </Row>
             </Container>
           </Route>

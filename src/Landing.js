@@ -9,7 +9,7 @@ export function Landing() {
       <Row className="landingRow">
         <Col className="landingCol">
           <Link to="/generated" className="landingButton generiraj">
-            Generiraj nove i sudi
+            Uskoro! Generiraj nove i sudi
           </Link>
         </Col>
         <Col className="landingCol">
