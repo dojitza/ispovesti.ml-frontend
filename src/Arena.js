@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  Modal,
-  Container,
-  Row,
-  Col,
-  Button,
-  Jumbotron,
-  Spinner,
-} from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ArenaIspovest } from "./ArenaIspovest";
-import { ArenaIntro } from "./ArenaIntro";
 import { constants } from "./constants";
 import seedrandom from "seedrandom";
 import { Ispovest } from "./Ispovest";
@@ -30,7 +20,6 @@ export function Arena() {
   seedrandom(localStorage.getItem("randomSeed"), { global: true });
 
   const likes = constants.LIKE_VARIATIONS;
-  const superlikes = constants.SUPERLIKE_VARIATIONS;
   const dislikes = constants.DISLIKE_VARIATIONS;
 
   const getGenerateButtonText = () =>
@@ -81,19 +70,19 @@ export function Arena() {
     return { ispovesti: ispovesti, userData: userData };
   };
 
-  useEffect(() => {
-    const asyncCaller = async () => {
-      const data = await fetchData();
-      const userData = data.userData;
+  const updateData = async () => {
+    const data = await fetchData();
+    const userData = data.userData;
 
-      setTimeLeftForSubmit(
-        (userData?.lastPublishTime | 0) +
-          constants.SUBMISSION_THRESHOLD_SECONDS -
-          Math.round(new Date().getTime() / 1000)
-      );
-    };
-    const intervalRef = asyncCaller();
-    return () => clearInterval(intervalRef);
+    setTimeLeftForSubmit(
+      (userData?.lastPublishTime | 0) +
+        constants.SUBMISSION_THRESHOLD_SECONDS -
+        Math.round(new Date().getTime() / 1000)
+    );
+  };
+
+  useEffect(() => {
+    updateData();
   }, [page]);
 
   useEffect(() => {
@@ -145,7 +134,7 @@ export function Arena() {
   return (
     <>
       <IspovestGenerationModal
-        fetchData={fetchData}
+        updateData={updateData}
         showGenerationModal={showGenerationModal}
         setShowGenerationModal={setShowGenerationModal}
       />
@@ -183,6 +172,7 @@ export function Arena() {
           setPage={setPage}
           waitingForAsync={waitingForAsync}
           reachedEndFlag={ispovesti.length < 10}
+          pageIndicatorClickHandler={updateData}
         />
         {ispovesti?.map((ispovest) => (
           <Ispovest

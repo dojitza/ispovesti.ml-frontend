@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Jumbotron, Pagination } from "react-bootstrap";
+import React from "react";
+import { Container, Row, Col, Jumbotron } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { constants } from "./constants";
 import { Arena } from "./Arena";
 import { Ispovesti } from "./Ispovesti";
 import { Landing } from "./Landing";

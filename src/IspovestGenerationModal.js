@@ -6,7 +6,7 @@ import { constants } from "./constants";
 import { toHHMMSS } from "./helpers";
 
 export function IspovestGenerationModal(props) {
-  const { fetchData, showGenerationModal, setShowGenerationModal } = props;
+  const { updateData, showGenerationModal, setShowGenerationModal } = props;
   const [showIntro, setShowIntro] = useState(true);
   const [generatedIspovest, setGeneratedIspovest] = useState({
     id: null,
@@ -70,11 +70,10 @@ export function IspovestGenerationModal(props) {
       }
     );
     if (response.ok) {
-      alert("Uspešno objavljeno");
       setShowGenerationModal(false);
-      fetchData();
+      updateData();
     } else {
-      alert("Došlo je do greške, probajte opet");
+      alert("Došlo je do greške, pokušajte opet opet");
     }
     setWaitingForPublish(false);
   };
@@ -97,14 +96,16 @@ export function IspovestGenerationModal(props) {
               Dobrodošli u generiranje ispovesti. Na idućem ekranu Upišite
               početak ispovesti ako želite (do 20 znakova!) i kliknite
               generiraj. Zbog velikih zahtjeva na sistem generiranje ispovesti
-              traje oko minute i ako je aktivno mnogo korisnika bit ćete
-              stavljeni u red za čekanje. Jednom kada se ispovest generira moći
-              ćete ju prihvatiti ili generirati novu, sve dok ne budete
-              zadovoljni sa svojom ispovesti. Jednom kada ste zadovoljni,
-              opcionalno upisite svoje ime i kliknite prihvati. Ispovest će se
-              objaviti u generiraj sekciji gde će ući u konkurenciju za
-              objavljivanje na glavnoj listi i nasim ostalim platformama (ig,
-              fb)
+              traje do {constants.GENERATION_ESTIMATE} minute i ako je aktivno
+              mnogo korisnika bit ćete stavljeni u red za čekanje. Jednom kada
+              se ispovest generira moći ćete da ju prihvatite ili generirate
+              novu, sve dok ne budete zadovoljni sa svojom ispovesti. Jednom
+              kada ste zadovoljni, opcionalno upišite svoje ime i kliknite
+              prihvati. Ispovest će se objaviti u generiraj sekciji gde će ući u
+              konkurenciju za objavljivanje na glavnoj listi i našim ostalim
+              platformama (ig, fb). Ispovest možete da objavite dvaput dnevno,
+              tj. preciznije jednom svakih{" "}
+              {constants.SUBMISSION_THRESHOLD_SECONDS / 3600} časova.
             </Row>
             <Row className="modalRow buttonRow">
               <button
@@ -172,18 +173,24 @@ export function IspovestGenerationModal(props) {
                 <button
                   title="Objavi"
                   className={`button continueButton ${
-                    waitingForGeneration ? "disabledButton" : ""
+                    waitingForGeneration || generatedIspovest.id === null
+                      ? "disabledButton"
+                      : ""
                   }`}
                   onClick={() => {
                     const r = window.confirm(
-                      "Da li ste sigurni da želite objaviti ispovest?"
+                      "Da li ste sigurni da želite objaviti ispovest? Ispovest možete da objavite jednom svakih " +
+                        constants.SUBMISSION_THRESHOLD_SECONDS / 3600 +
+                        " časova"
                     );
                     if (r == true) {
                       publishIspovest(generatedIspovest.id, authorName);
                       setShowGenerationModal(false);
                     }
                   }}
-                  disabled={waitingForGeneration}
+                  disabled={
+                    waitingForGeneration || generatedIspovest.id === null
+                  }
                 >
                   Objavi
                 </button>

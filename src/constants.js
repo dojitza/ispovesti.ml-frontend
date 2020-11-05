@@ -16,4 +16,5 @@ export const constants = {
     "Najjača dosad",
   ],
   SUBMISSION_THRESHOLD_SECONDS: 43200,
+  GENERATION_ESTIMATE: 2,
 };

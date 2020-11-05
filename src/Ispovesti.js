@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Jumbotron } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { constants } from "./constants";
-import { Arena } from "./Arena";
 import { Ispovest } from "./Ispovest";
 import seedrandom from "seedrandom";
-import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import { Pagination } from "./Pagination.js";
 
-export function Ispovesti(pops) {
+export function Ispovesti() {
   const [ispovesti, setIspovesti] = useState([]);
   const [page, setPage] = useState(0);
   const [waitingForAsync, setWaitingForAysnc] = useState(false);

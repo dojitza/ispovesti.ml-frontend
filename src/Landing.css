@@ -20,7 +20,7 @@
 }
 
 .generiraj {
-  background-color: rgba(30, 120, 30, 0.8);
+  background-color: rgba(30, 70, 30, 0.8);
   border-color: black;
   border-style: solid;
   color: black;
@@ -51,4 +51,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.landingInfo {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 100px;
+  text-align: center;
+  font-size: 28px;
+}
+
+a,
+a:hover {
+  color: gray;
 }

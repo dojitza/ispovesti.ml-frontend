@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Jumbotron, Spinner } from "react-bootstrap";
+import React from "react";
+import { Row, Col, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { constants } from "./constants";
-import { Arena } from "./Arena";
-import { Ispovest } from "./Ispovest";
-import seedrandom from "seedrandom";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 
 export const Pagination = (props) => {
@@ -13,10 +9,11 @@ export const Pagination = (props) => {
     setPage,
     waitingForAsync,
     reachedEndFlag,
+    pageIndicatorClickHandler,
   } = props;
 
-  const disableRight = reachedEndFlag || waitingForAsync
-  const disableLeft = page === 0 || waitingForAsync
+  const disableRight = reachedEndFlag || waitingForAsync;
+  const disableLeft = page === 0 || waitingForAsync;
 
   return (
     <Row style={{ marginTop: 20, marginBottom: 20 }}>
@@ -42,10 +39,13 @@ export const Pagination = (props) => {
       </Col>
       <Col style={{ display: "flex", justifyContent: "center" }}>
         <div>
-          {waitingForAsync ? <Spinner style={{ padding: 30 }} animation="border" role="status">
-            <span className="sr-only">Loading...</span>
-          </Spinner> :
+          {waitingForAsync ? (
+            <Spinner style={{ padding: 30 }} animation="border" role="status">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+          ) : (
             <span
+              onClick={pageIndicatorClickHandler}
               style={{
                 textAlign: "center",
                 fontSize: 80,
@@ -58,7 +58,8 @@ export const Pagination = (props) => {
               }}
             >
               {page + 1}
-            </span>}
+            </span>
+          )}
         </div>
       </Col>
       <Col
