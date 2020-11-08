@@ -13,14 +13,12 @@ export function Landing() {
             generirane generativnim tekstualnim modelom pod imenom{" "}
             <a href="https://openai.com/blog/better-language-models/">gpt-2</a>{" "}
             - naučenom nad skupom od 120 hiljada ispovesti preuzetih sa sajta{" "}
-            <a href="http://ispovesti.com">ispovesti.com</a>. Naš rad nad
+            <a href="http://ispovesti.com">ispovesti.com</a>. Naš rad s modelom
             sastojao se od prikupljanja originalnog materijala (ispovesti), te
             treniranja modela kako bi upio njihovu bit. Rezultirajući model
-            generirao je sve ispovesti koje se nalaze na ovom sajtu. Sors kod
-            projekta dostupan je na{" "}
-            <a href="https://github.com/dojitza/ispovesti.ml-backend">
-              githubu
-            </a>
+            generirao je sve ispovesti koje se nalaze na ovom sajtu. Više o
+            projektu možete pročitati na sledećem{" "}
+            <a href="https://dojitza.github.io/projects/ispovestiml/">linku</a>
           </Col>
         </Row>
         <Row className="landingRow">

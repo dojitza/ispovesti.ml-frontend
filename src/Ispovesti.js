@@ -14,20 +14,21 @@ export function Ispovesti() {
   const likes = constants.LIKE_VARIATIONS;
   const dislikes = constants.DISLIKE_VARIATIONS;
 
+  const fetchData = async () => {
+    setWaitingForAysnc(true);
+    try {
+      const response = await fetch(
+        `${constants.API_ROOT}/ispovesti?page=${page}`
+      );
+      const ispovesti = await response.json();
+      setIspovesti(ispovesti);
+    } catch (e) {
+      console.log(e);
+    }
+    setWaitingForAysnc(false);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      setWaitingForAysnc(true);
-      try {
-        const response = await fetch(
-          `${constants.API_ROOT}/ispovesti?page=${page}`
-        );
-        const ispovesti = await response.json();
-        setIspovesti(ispovesti);
-      } catch (e) {
-        console.log(e);
-      }
-      setWaitingForAysnc(false);
-    };
     fetchData();
   }, [page]);
 
@@ -79,6 +80,7 @@ export function Ispovesti() {
         setPage={setPage}
         waitingForAsync={waitingForAsync}
         reachedEndFlag={ispovesti.length < 10}
+        pageIndicatorClickHandler={fetchData}
       />
       {ispovesti?.map((ispovest) => (
         <Ispovest
@@ -95,6 +97,7 @@ export function Ispovesti() {
         setPage={setPage}
         waitingForAsync={waitingForAsync}
         reachedEndFlag={ispovesti.length < 10}
+        pageIndicatorClickHandler={fetchData}
       />
     </div>
   );

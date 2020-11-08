@@ -22,7 +22,7 @@ export function IspovestGenerationModal(props) {
   useEffect(() => {
     const tick = () => {
       setEta(eta - 1);
-      if (eta % 60 == 1) {
+      if (eta % constants.GENERATION_ESTIMATE_SECONDS == 1) {
         queuePosition > 0 && setQueuePosition(queuePosition - 1);
       }
       if (eta <= 1) {
@@ -39,7 +39,9 @@ export function IspovestGenerationModal(props) {
     const response = await fetch(`${constants.API_ROOT}/queueLength`);
     const queuePosition = await response.json();
     setQueuePosition(parseInt(queuePosition));
-    setEta((parseInt(queuePosition) + 1) * 60);
+    setEta(
+      (parseInt(queuePosition) + 1) * constants.GENERATION_ESTIMATE_SECONDS
+    );
   };
 
   const sendGenerateRequest = async (prefix) => {
@@ -96,15 +98,15 @@ export function IspovestGenerationModal(props) {
               Dobrodošli u generiranje ispovesti. Na idućem ekranu Upišite
               početak ispovesti ako želite (do 20 znakova!) i kliknite
               generiraj. Zbog velikih zahtjeva na sistem generiranje ispovesti
-              traje do {constants.GENERATION_ESTIMATE} minute i ako je aktivno
-              mnogo korisnika bit ćete stavljeni u red za čekanje. Jednom kada
-              se ispovest generira moći ćete da ju prihvatite ili generirate
-              novu, sve dok ne budete zadovoljni sa svojom ispovesti. Jednom
-              kada ste zadovoljni, opcionalno upišite svoje ime i kliknite
-              prihvati. Ispovest će se objaviti u generiraj sekciji gde će ući u
-              konkurenciju za objavljivanje na glavnoj listi i našim ostalim
-              platformama (ig, fb). Ispovest možete da objavite dvaput dnevno,
-              tj. preciznije jednom svakih{" "}
+              traje do {constants.GENERATION_ESTIMATE_SECONDS / 60}min i ako je
+              aktivno mnogo korisnika bit ćete stavljeni u red za čekanje.
+              Jednom kada se ispovest generira moći ćete da ju prihvatite ili
+              generirate novu, sve dok ne budete zadovoljni sa svojom ispovesti.
+              Jednom kada ste zadovoljni, opcionalno upišite svoje ime i
+              kliknite prihvati. Ispovest će se objaviti u generiraj sekciji gde
+              će ući u konkurenciju za objavljivanje na glavnoj listi i našim
+              ostalim platformama (ig, fb). Ispovest možete da objavite dvaput
+              dnevno, tj. preciznije jednom svakih{" "}
               {constants.SUBMISSION_THRESHOLD_SECONDS / 3600} časova.
             </Row>
             <Row className="modalRow buttonRow">

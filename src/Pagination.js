@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
+import "./Pagination.css";
 
 export const Pagination = (props) => {
   const {
@@ -38,14 +39,13 @@ export const Pagination = (props) => {
         />
       </Col>
       <Col style={{ display: "flex", justifyContent: "center" }}>
-        <div>
+        <div className="pageIndicator" onClick={pageIndicatorClickHandler}>
           {waitingForAsync ? (
             <Spinner style={{ padding: 30 }} animation="border" role="status">
               <span className="sr-only">Loading...</span>
             </Spinner>
           ) : (
             <span
-              onClick={pageIndicatorClickHandler}
               style={{
                 textAlign: "center",
                 fontSize: 80,

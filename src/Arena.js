@@ -190,6 +190,7 @@ export function Arena() {
           setPage={setPage}
           waitingForAsync={waitingForAsync}
           reachedEndFlag={ispovesti.length < 10}
+          pageIndicatorClickHandler={updateData}
         />
       </div>
     </>
