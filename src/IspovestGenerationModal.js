@@ -68,6 +68,7 @@ export function IspovestGenerationModal(props) {
       if (responseJson.id) {
         setGeneratedIspovest(responseJson);
         setGenerationState(constants.GENERATION_STATE_GENERATED);
+        setEta(constants.GENERATION_ESTIMATE_SECONDS);
       } else {
         if (responseJson.queuePosition != queuePosition) {
           setEta(
