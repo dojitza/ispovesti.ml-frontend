@@ -13,6 +13,7 @@
   line-height: 50px;
   cursor: pointer;
   text-decoration: none !important;
+  height: 150px;
 }
 .landingButton:hover {
   text-decoration: none;
@@ -33,6 +34,7 @@
   border-color: black;
   border-style: solid;
   color: lightgray;
+  line-height: 100px;
 }
 
 .citaj:hover {
@@ -43,6 +45,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 .landingContainer {
@@ -59,7 +62,7 @@
   padding: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   text-align: center;
   font-size: 28px;
 }
