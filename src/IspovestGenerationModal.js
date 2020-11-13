@@ -144,9 +144,8 @@ export function IspovestGenerationModal(props) {
               Jednom kada ste zadovoljni, opcionalno upišite svoje ime i
               kliknite prihvati. Ispovest će se objaviti u generiraj sekciji gde
               će ući u konkurenciju za objavljivanje na glavnoj listi i našim
-              ostalim platformama (ig, fb). Ispovest možete da objavite dvaput
-              dnevno, tj. preciznije jednom svakih{" "}
-              {constants.SUBMISSION_THRESHOLD_SECONDS / 3600} časova.
+              ostalim platformama (ig, fb). Ispovest možete da objavite jednom
+              svakih {constants.SUBMISSION_THRESHOLD_SECONDS / 60} min.
             </Row>
             <Row className="modalRow buttonRow">
               <button
