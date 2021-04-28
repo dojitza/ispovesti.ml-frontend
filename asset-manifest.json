@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/ispovesti-ml.frontend/static/css/main.39dd2b1b.chunk.css",
-    "main.js": "/ispovesti-ml.frontend/static/js/main.11524fe9.chunk.js",
-    "main.js.map": "/ispovesti-ml.frontend/static/js/main.11524fe9.chunk.js.map",
-    "runtime-main.js": "/ispovesti-ml.frontend/static/js/runtime-main.81ea85f4.js",
-    "runtime-main.js.map": "/ispovesti-ml.frontend/static/js/runtime-main.81ea85f4.js.map",
-    "static/css/2.9233ae65.chunk.css": "/ispovesti-ml.frontend/static/css/2.9233ae65.chunk.css",
-    "static/js/2.dffe9a9d.chunk.js": "/ispovesti-ml.frontend/static/js/2.dffe9a9d.chunk.js",
-    "static/js/2.dffe9a9d.chunk.js.map": "/ispovesti-ml.frontend/static/js/2.dffe9a9d.chunk.js.map",
-    "index.html": "/ispovesti-ml.frontend/index.html",
-    "precache-manifest.fcb5501196ec168ca0f0f71c632f5c1f.js": "/ispovesti-ml.frontend/precache-manifest.fcb5501196ec168ca0f0f71c632f5c1f.js",
-    "service-worker.js": "/ispovesti-ml.frontend/service-worker.js",
-    "static/css/2.9233ae65.chunk.css.map": "/ispovesti-ml.frontend/static/css/2.9233ae65.chunk.css.map",
-    "static/css/main.39dd2b1b.chunk.css.map": "/ispovesti-ml.frontend/static/css/main.39dd2b1b.chunk.css.map",
-    "static/js/2.dffe9a9d.chunk.js.LICENSE.txt": "/ispovesti-ml.frontend/static/js/2.dffe9a9d.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/ispovesti-ml.frontend/static/media/circuit-texture.dddde1cf.jpg"
+    "main.css": "/ispovesti.ml/static/css/main.cb265f39.chunk.css",
+    "main.js": "/ispovesti.ml/static/js/main.65660489.chunk.js",
+    "main.js.map": "/ispovesti.ml/static/js/main.65660489.chunk.js.map",
+    "runtime-main.js": "/ispovesti.ml/static/js/runtime-main.e3adb1b4.js",
+    "runtime-main.js.map": "/ispovesti.ml/static/js/runtime-main.e3adb1b4.js.map",
+    "static/css/2.9233ae65.chunk.css": "/ispovesti.ml/static/css/2.9233ae65.chunk.css",
+    "static/js/2.4ec97ec8.chunk.js": "/ispovesti.ml/static/js/2.4ec97ec8.chunk.js",
+    "static/js/2.4ec97ec8.chunk.js.map": "/ispovesti.ml/static/js/2.4ec97ec8.chunk.js.map",
+    "index.html": "/ispovesti.ml/index.html",
+    "precache-manifest.51a0b7c040e6e4d959e54c13189c5589.js": "/ispovesti.ml/precache-manifest.51a0b7c040e6e4d959e54c13189c5589.js",
+    "service-worker.js": "/ispovesti.ml/service-worker.js",
+    "static/css/2.9233ae65.chunk.css.map": "/ispovesti.ml/static/css/2.9233ae65.chunk.css.map",
+    "static/css/main.cb265f39.chunk.css.map": "/ispovesti.ml/static/css/main.cb265f39.chunk.css.map",
+    "static/js/2.4ec97ec8.chunk.js.LICENSE.txt": "/ispovesti.ml/static/js/2.4ec97ec8.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/ispovesti.ml/static/media/circuit-texture.dddde1cf.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.81ea85f4.js",
+    "static/js/runtime-main.e3adb1b4.js",
     "static/css/2.9233ae65.chunk.css",
-    "static/js/2.dffe9a9d.chunk.js",
-    "static/css/main.39dd2b1b.chunk.css",
-    "static/js/main.11524fe9.chunk.js"
+    "static/js/2.4ec97ec8.chunk.js",
+    "static/css/main.cb265f39.chunk.css",
+    "static/js/main.65660489.chunk.js"
   ]
 }
