@@ -1,5 +1,5 @@
 export const constants = {
-  API_ROOT: "http://192.168.100.14:5000/api/v1",
+  API_ROOT: "localhost:8100/api/v1",
   LIKE_VARIATIONS: [
     "Odobravam",
     "To miško",
